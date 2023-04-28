@@ -1,0 +1,16 @@
+# Customise GitHub Linguist
+
+# Include Markdown files in stats
+*.md linguist-detectable
+
+# Specify line endings for text files
+.pas text
+.dpr text
+.dproj text
+.gitignore text
+.gitattributes text
+.rc text
+.vi text
+.md text
+.bat text
+VERSION text
