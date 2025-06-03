@@ -144,6 +144,23 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="BogBat.AppInfo.pas"/>
+        <DCCReference Include="BogBat.Errors.pas"/>
+        <DCCReference Include="BogBat.Info.Logger.pas"/>
+        <DCCReference Include="BogBat.Info.Screen.Base.pas"/>
+        <DCCReference Include="BogBat.Info.Screen.Help.pas"/>
+        <DCCReference Include="BogBat.Info.Screen.Usage.pas"/>
+        <DCCReference Include="BogBat.Info.Screen.Version.pas"/>
+        <DCCReference Include="BogBat.IO.Base.pas"/>
+        <DCCReference Include="BogBat.IO.Readers.Console.pas"/>
+        <DCCReference Include="BogBat.IO.Readers.FileSystem.pas"/>
+        <DCCReference Include="BogBat.IO.Writers.Console.pas"/>
+        <DCCReference Include="BogBat.IO.Writers.FileSystem.pas"/>
+        <DCCReference Include="BogBat.Main.pas"/>
+        <DCCReference Include="BogBat.Params.pas"/>
+        <DCCReference Include="BogBat.Templates.DataParser.pas"/>
+        <DCCReference Include="BogBat.Templates.Processor.pas"/>
+        <DCCReference Include="BogBat.Templates.Replacer.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
