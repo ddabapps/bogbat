@@ -15,13 +15,11 @@ uses
   BogBat.Info.Logger,
   BogBat.Templates.Processor;
 
-// TODO: Limit length of [output?] files to High(Int32) ???
 type
 
   TMain = class
   strict private
     class var
-      // TODO: Replace with logger class
       fErrorLogger: TLogger;
     class procedure Execute;
     class procedure DisplayUsage;

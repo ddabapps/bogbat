@@ -23,8 +23,6 @@ type
     function Read: string; virtual; abstract;
   end;
 
-  { TODO: refactor TAbstractWriter to generate bytes to write then call
-      protected abstract method to perform the write }
   TOutputWriter = class abstract
   strict protected
     function StringToBytes(const AContent: string; const AEncoding: TEncoding;

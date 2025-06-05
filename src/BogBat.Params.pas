@@ -8,11 +8,6 @@ unit BogBat.Params;
 
 {$SCOPEDENUMS ON}
 
-{ TODO: Set input/output encoding default when reading/writing console to
-        console's current encoding using GetConsoleOutputCP and
-        SetConsoleOutputCP.
-}
-
 interface
 
 uses

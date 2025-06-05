@@ -88,7 +88,6 @@ begin
             PlainTextStartIdx, NextTpltIdx - PlainTextStartIdx
           )
         );
-      // TODO -cRefactor: simplify following function call chain
       var Template := ExtractTpltFrom(NextTpltIdx);
       var DataName := ExtractDataNameFromTplt(Template);
       var DataValue := GetDataValue(DataName);
