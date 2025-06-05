@@ -17,10 +17,13 @@ uses
 type
   TConsoleWriter = class abstract(TOutputWriter)
   strict private
+    const
+      ChunkSize = 1024 * 32;
     var
       fEncoding: TEncoding;
       fWantPreamble: Boolean;
-    procedure WriteToConsole(const AData: TBytes);
+    procedure WriteToConsole(const AData: TBytes;
+      const AIndex, ALength: Integer);
   strict protected
     function GetOutputDeviceID: Cardinal; virtual; abstract;
   public
@@ -42,6 +45,7 @@ type
 implementation
 
 uses
+  System.Math,
   Winapi.Windows;
 
 { TConsoleWriter }
@@ -56,18 +60,26 @@ end;
 
 procedure TConsoleWriter.Write(const AContent: string);
 begin
-  // TODO: write in chunks to avoid size limit on WriteFile ??
   var Data := StringToBytes(AContent, fEncoding, fWantPreamble);
-  WriteToConsole(Data);
+  var BytesRemaining := Length(Data);
+  var NextIdx: Integer := 0;
+  while BytesRemaining > 0 do
+  begin
+    var BytesWritten := Min(ChunkSize, BytesRemaining);
+    WriteToConsole(Data, NextIdx, BytesWritten);
+    Dec(BytesRemaining, BytesWritten);
+    Inc(NextIdx, BytesWritten);
+  end;
 end;
 
-procedure TConsoleWriter.WriteToConsole(const AData: TBytes);
+procedure TConsoleWriter.WriteToConsole(const AData: TBytes; const AIndex,
+  ALength: Integer);
 begin
   var Unused: Cardinal;    // receives number of bytes written (unused)
   WriteFile(
     GetStdHandle(GetOutputDeviceID),
-    AData[0],
-    Cardinal(Length(AData)),
+    AData[AIndex],
+    Cardinal(ALength),
     Unused,
     nil
   );
