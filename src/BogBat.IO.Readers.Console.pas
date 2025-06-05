@@ -6,11 +6,6 @@
 
 unit BogBat.IO.Readers.Console;
 
-{
-   TODO: Set to use current console code page - use GetConsoleOutputCP
-         OR set it to UTF8 using SetConsoleOutputCP
-}
-
 interface
 
 uses
@@ -24,7 +19,7 @@ type
       ChunkSize = 1024 * 32;
     var
       fEncoding: TEncoding;
-    function ReadStdInChunk: TBytes;
+    function ReadBuf(var Buffer; const Count: Integer): Integer;
   public
     constructor Create(const AEncoding: TEncoding);
     function Read: string; override;
@@ -44,29 +39,45 @@ begin
 end;
 
 function TConsoleStdInReader.Read: string;
+var
+  Buffer: TBytes;
+  Data: TBytes;
+  BytesRead: Cardinal;
+  TotalBytes: Cardinal;
+  Offset: Cardinal;
 begin
-  var Data: TBytes;
-  SetLength(Data, 0);
+  // read data from stdin to Data in chunks
+  SetLength(Buffer, ChunkSize);
+  TotalBytes := 0;
   repeat
-    var Chunk := ReadStdInChunk;
-    Data := Concat(Data, Chunk);
+    BytesRead := ReadBuf(Buffer[0], ChunkSize);
+    if BytesRead = 0 then
+      Break;
+    Offset := TotalBytes;
+    Inc(TotalBytes, BytesRead);
+    SetLength(Data, TotalBytes);
+    Move(Buffer[0], Data[Offset], BytesRead);
   until False;
+  // convert to string, detecting encoding
+  SetLength(Result, 1);
   Result := BytesToString(Data, fEncoding);
 end;
 
-function TConsoleStdInReader.ReadStdInChunk: TBytes;
+function TConsoleStdInReader.ReadBuf(var Buffer; const Count: Integer): Integer;
+var
+  BytesRead: Cardinal;  // Number of bytes actually read
 begin
-  SetLength(Result, ChunkSize);
-  var BytesRead: Cardinal;
+  if Count = 0 then
+  begin
+    // No bytes required - nothing to do
+    Result := 0;
+    Exit;
+  end;
+  // Read from std input into buffer
   ReadFile(
-    GetStdHandle(STD_INPUT_HANDLE),
-    Result[0],
-    Cardinal(Length(Result)),
-    BytesRead,
-    nil
+    GetStdHandle(STD_INPUT_HANDLE), Buffer, Count, BytesRead, nil
   );
-  if BytesRead < Length(Result) then
-    SetLength(Result, BytesRead);
+  Result := BytesRead;
 end;
 
 end.
