@@ -27,7 +27,6 @@ uses
 
 procedure TVersionScreen.Display;
 begin
-  Logger.WriteLn('*** WARNING: No version information resource available');
   Logger.WriteLn('%s %s ', [TAppInfo.ProgramVersion, TAppInfo.ProgramExeDate]);
 end;
 

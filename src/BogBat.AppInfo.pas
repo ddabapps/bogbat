@@ -62,7 +62,7 @@ begin
       Exit;
     var PBuf: Pointer;
     var Len: Cardinal;
-    const SubBlock = '\StringFileInfo\080904E4\ProductVersion';
+    const SubBlock = '\StringFileInfo\0809FDE9\ProductVersion';
     if not VerQueryValue(VerInfoBuf, PChar(SubBlock), PBuf, Len) then
       Exit;
     Result := PChar(PBuf);
