@@ -13,6 +13,7 @@ program BogBat;
 {$APPTYPE CONSOLE}
 
 {$Resource *.res}
+{$Resource VersionInfo.res}
 
 uses
   System.SysUtils,

@@ -79,6 +79,12 @@
         <BRCC_OutputDir>..\_build\$(Platform)\$(Config)\bin</BRCC_OutputDir>
         <VerInfo_Locale>2057</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <PreBuildEvent><![CDATA[DEL "..\_build\$(Platform)\$(Config)\bin\Version.res"
+"$(BogBatRoot)\BogBat.exe" -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache
+"$(BDSBIN)\BRCC32" -c65001 -fo "..\_build\$(Platform)\$(Config)\bin\VersionInfo.res" .\VersionInfo.rc.~tmp
+$(PreBuildEvent)]]></PreBuildEvent>
+        <PostBuildEvent><![CDATA[DEL .\VersionInfo.rc.~tmp
+$(PostBuildEvent)]]></PostBuildEvent>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Linux64)'!=''">
         <DCC_UsePackage>DataSnapServer;fmx;emshosting;DbxCommonDriver;bindengine;FireDACCommonODBC;emsclient;FireDACCommonDriver;IndyProtocols;dbxcds;emsedge;inetdb;FireDACSqliteDriver;DbxClientDriver;FireDACASADriver;soapmidas;dbexpress;FireDACInfxDriver;inet;DataSnapCommon;dbrtl;FireDACOracleDriver;CustomIPTransport;FireDACMSSQLDriver;DataSnapIndy10ServerTransport;DataSnapConnectors;FireDACMongoDBDriver;IndySystem;FireDACTDataDriver;bindcomp;FireDACCommon;DataSnapServerMidas;FireDACODBCDriver;emsserverresource;IndyCore;RESTBackendComponents;rtl;FireDACMySQLDriver;FireDACADSDriver;RESTComponents;dsnapxml;DataSnapClient;DataSnapFireDAC;emsclientfiredac;FireDACPgDriver;FireDAC;xmlrtl;dsnap;CloudService;FireDACDb2Driver;DataSnapNativeClient;DatasnapConnectorsFreePascal;soaprtl;soapserver;FireDACIBDriver;$(DCC_UsePackage)</DCC_UsePackage>
@@ -182,8 +188,8 @@
                     <Source Name="MainSource">BogBat.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k280.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp280.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k290.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp290.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="5">
@@ -1169,4 +1175,52 @@
     <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
+    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Linux64'">
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Linux64'">
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
+        <PreLinkEvent/>
+        <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
+    </PropertyGroup>
 </Project>
