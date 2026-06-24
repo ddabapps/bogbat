@@ -30,7 +30,7 @@ type
 
           data_file
 
-            Name of the file containing the data to be used to in placeholder
+            Name of the file containing the data to be used to for placeholder
             replacement. Required. File format expected to be UTF-8, but this
             can be changed using the --data-encoding option (see below).
 
@@ -105,16 +105,17 @@ type
           --delimiters=delims
 
             Specifies the delimiters to be used to begin and end a replacable
-            template. delims must either define the delimiters explicitly or be
-            a valid predefined name, as follows:
+            template. Delimiters must comprise one or more punctuation or symbol
+            characters. Opening delimiters must be different to closing
+            delimiters.
 
-            delims must either be a predefined name for a delimiter pair, as
-            follows:
+            For commonly used delimiters delims may be one of the following
+            predefined names:
 
             | delimiter name | opening delimiter | closing delimiter |
             |----------------|-------------------|-------------------|
             | moustache      | {{                | }}                |
-            | mustache       | {{ (default)      | }}  (default)     |
+            | mustache       | {{ (default)      | }} (default)      |
             | django         | {%                | %}                |
             | asp            | <%                | %>                |
             | php            | <?                | ?>                |
@@ -124,20 +125,19 @@ type
             | smarty         | {$                | }                 |
             |----------------|-------------------|-------------------|
 
-            Case is not significant for the above values.
+            Case is not significant for the above names.
 
-            Alternatively delims can be defined expicitly on the command line as
-            one or more symbols that define the opening delimiter, followed by
-            one or more alphabetic characters or spaces followed by one or more
-            symbols that define the closing delimiter. If any of the symbols
-            have a special purpose on the command line, or if spaces are
-            included, then the value must be quoted.
+            Any other delimiters must be specified explicitly, as follows: the
+            opening delimiter followed by a separator followed by a closing
+            delimiter. The separator must be one or more alphanumeric characters
+            or spaces.
 
-            The only purpose of the alphabetic characters / spaces is to
-            separate the opening a closing delimiters.
+            If any of the delimiter characters have a special purpose on the
+            command line, or if spaces are used as delimiters, then the value
+            must be quoted.
 
-            Examples delimiter definition values are "<a>", {{xxx}}, "{{ }}" and
-            {%Y%}.
+            Example delimiter definition values are "<a>", [999], "{{{ }" and
+            {Y}.
 
         Other usages:
 
