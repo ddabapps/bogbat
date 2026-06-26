@@ -8,7 +8,7 @@ Download the latest version from the project's GitHub [Releases page](https://gi
 
 Extract `BogBat.exe` from the downloaded zip file. Copy `BogBat.exe` anywhere on your computer and run.
 
-_BogBat_ is currently only available as a 64 bit build.
+_BogBat_ is currently only available as a 64 bit Windows build.
 
 ## Compiling
 
@@ -16,7 +16,7 @@ _BogBat_ is currently only available as a 64 bit build.
 
 * Clone or download the source code from https://github.com/ddabapps/bogbat.
 
-* Open Delphi (12.2 or later).
+* Open Delphi (13.1 or later).
 
 * Open Delphi's _Options_ dialogue box (_Tools | Options_). Select the _IDE | Environment Variables_ section and add the `BogBatRoot` environment variable under _User System Overrides_ and set its value to the path of the directory containing `BogBat.exe`, without trailing backslash.
 
