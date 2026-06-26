@@ -1,5 +1,5 @@
 ﻿{
-  Copyright (c) 2025, Peter Johnson, delphidabbler.com
+  Copyright (c) 2025-2026, Peter Johnson, delphidabbler.com
   MIT License
   https://github.com/ddabapps/bogbat
 }

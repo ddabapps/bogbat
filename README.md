@@ -28,4 +28,4 @@ Note that the IDE uses the BogBat executable to create the version information r
 
 ## License
 
-MIT License, copyright 2025 (c) Peter Johnson.
+MIT License, copyright 2025-2026 (c) Peter Johnson.
