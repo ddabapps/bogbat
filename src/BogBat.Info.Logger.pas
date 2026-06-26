@@ -123,12 +123,12 @@ end;
 
 class function TLoggerFactory.CreateStdErrConsoleLogger: TLogger;
 begin
-  Result := TStdOutConsoleLogger.Create;
+  Result := TStdErrConsoleLogger.Create;
 end;
 
 class function TLoggerFactory.CreateStdOutConsoleLogger: TLogger;
 begin
-  Result := TStdErrConsoleLogger.Create;
+  Result := TStdOutConsoleLogger.Create;
 end;
 
 end.
