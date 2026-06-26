@@ -1,5 +1,5 @@
 ﻿{
-  Copyright (c) 2025, Peter Johnson, delphidabbler.com
+  Copyright (c) 2025-2026, Peter Johnson, delphidabbler.com
   MIT License
   https://github.com/ddabapps/bogbat
 }
@@ -123,12 +123,12 @@ end;
 
 class function TLoggerFactory.CreateStdErrConsoleLogger: TLogger;
 begin
-  Result := TStdOutConsoleLogger.Create;
+  Result := TStdErrConsoleLogger.Create;
 end;
 
 class function TLoggerFactory.CreateStdOutConsoleLogger: TLogger;
 begin
-  Result := TStdErrConsoleLogger.Create;
+  Result := TStdOutConsoleLogger.Create;
 end;
 
 end.

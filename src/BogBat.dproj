@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{369F9D2E-C407-4A9D-98B4-F2E8C2ED17C2}</ProjectGuid>
-        <ProjectVersion>20.2</ProjectVersion>
+        <ProjectVersion>20.4</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
@@ -334,6 +334,16 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     </Platform>
                     <Platform Name="Android64">
                         <RemoteDir>res\values-v31</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStylesV35">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values-v35</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Android64">
+                        <RemoteDir>res\values-v35</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -870,6 +880,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <Platform Name="Win64x">
                         <Operation>1</Operation>
                     </Platform>
+                    <Platform Name="WinARM64EC">
+                        <Operation>1</Operation>
+                    </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectiOSDeviceDebug">
                     <Platform Name="iOSDevice32">
@@ -940,6 +953,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <RemoteDir>Assets</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
+                    <Platform Name="WinARM64EC">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
                 </DeployClass>
                 <DeployClass Name="UWP_DelphiLogo44">
                     <Platform Name="Win32">
@@ -947,6 +964,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="Win64">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="WinARM64EC">
                         <RemoteDir>Assets</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
@@ -1163,6 +1184,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win64x" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="WinARM64EC" Name="$(PROJECTNAME)"/>
             </Deployment>
             <Platforms>
                 <Platform value="Linux64">False</Platform>
@@ -1176,51 +1198,51 @@ $(PostBuildEvent)]]></PostBuildEvent>
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Linux64'">
-        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
-        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Linux64'">
-        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
-        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
-        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
+        <PreBuildEvent>DEL &quot;..\_build\$(Platform)\$(Config)\bin\Version.res&quot;&amp;&amp;&quot;$(BogBatRoot)\BogBat.exe&quot; -d:.\VERSION -t:.\VersionInfo.rc.template -o:.\VersionInfo.rc.~tmp --delimiters=mustache&amp;&amp;&quot;$(BDSBIN)\BRCC32&quot; -c65001 -fo &quot;..\_build\$(Platform)\$(Config)\bin\VersionInfo.res&quot; .\VersionInfo.rc.~tmp</PreBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
+        <PostBuildEvent>DEL .\VersionInfo.rc.~tmp</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
