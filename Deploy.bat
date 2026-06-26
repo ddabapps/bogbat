@@ -20,9 +20,7 @@
 ::   4) Run the script.
 ::
 :: Usage:
-::   Deploy <version>
-:: where
-::   <version> is the version number of the release, e.g. 0.5.3-beta or 1.2.0.
+::   Deploy
 
 @echo off
 
@@ -30,15 +28,52 @@ echo ------------------------
 echo Deploying BogBat Release
 echo ------------------------
 
-:: Check for required parameter
-if "%1"=="" goto paramerror
-
 :: Check for required environment variables
 if "%ZipRoot%"=="" goto envvarerror
 if "%BogBatRoot%"=="" goto envvarerror
 
+:: Get the version number from the version info file - this MUST exist
+:: get major version number (required)
+set VerFile=.\src\VERSION
+for /f "tokens=2 delims==" %%A in (
+  'findstr /rc:"^ver-major" "%VerFile%"'
+) do (
+    set verMajor=%%A
+  )
+)
+:: get minor version number (required)
+for /f "tokens=2 delims==" %%A in (
+  'findstr /rc:"^ver-minor" "%VerFile%"'
+) do (
+    set verMinor=%%A
+  )
+)
+:: get patch number (required)
+for /f "tokens=2 delims==" %%A in (
+  'findstr /rc:"^ver-patch" "%VerFile%"'
+) do (
+    set verPatch=%%A
+  )
+)
+:: get suffix (optional)
+for /f "tokens=2 delims==" %%A in (
+  'findstr /rc:"^ver-suffix" "%VerFile%"'
+) do (
+    set verSuffix=%%A
+)
+:: check for required values
+if not defined verMajor (
+    goto badversionerror
+)
+if not defined verMinor (
+    goto badversionerror
+)
+if not defined verPatch (
+    goto badversionerror
+)
+
 :: Set variables
-set Version=%1
+set Version=%verMajor%.%verMinor%.%verPatch%%suffix%
 set BuildRoot=.\_build
 set Win64Dir=%BuildRoot%\Win64\Release\exe
 set ReleaseDir=%BuildRoot%\release
@@ -59,7 +94,7 @@ setlocal
 cd %SrcDir%
 
 echo.
-echo Building 64 bit version
+echo Building 64 bit version %Version%
 echo.
 msbuild %ProjectName%.dproj /p:config=Release /p:platform=Win64
 echo.
@@ -86,17 +121,23 @@ goto end
 
 :: Error messages
 
-:paramerror
-echo.
-echo ***ERROR: Please specify a version number as a parameter
-echo.
-goto end
-
 :envvarerror
 echo.
-echo ***ERROR: ZipRoot and/or BogBatRoot environment variables not set
+echo ***ERROR: ZipRoot and/or BogBatRoot environment variables not set:
+echo           ZipRoot=%ZipRoot%
+echo           BogBatRoot=%BogBatRoot%
 echo.
 goto end
 
-:: End
+:badversionerror
+echo.
+echo ***ERROR: An expected field is not set in %VerFile%:
+echo           verMajor=%verMajor%
+echo           verMinor=%verMinor%
+echo           verPatch=%verPatch%
+echo.
+goto end
+
+:: Done
+
 :end
